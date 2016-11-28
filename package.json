@@ -1,0 +1,23 @@
+{
+  "name": "invoices",
+  "version": "0.0.1",
+  "main": "src/starter.js",
+  "repository": "git@github.com:neciu/invoices.git",
+  "author": "Tomasz Netczuk <contact@netczuk.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "3.7.0",
+    "markdown": "0.5.0",
+    "phantomjs-prebuilt": "2.1.13",
+    "webpage": "0.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-latest": "6.16.0",
+    "babel-preset-stage-0": "6.16.0",
+    "babel-register": "6.18.0",
+    "eslint": "3.11.1"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ."
+  }
+}
