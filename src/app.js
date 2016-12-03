@@ -52,7 +52,12 @@ function renderTemplate() {
   return pug.renderFile('./src/template.pug', invoiceData);
 }
 
-pdf.create(html).toFile('./invoice.pdf', function (error) {
+const options = {
+  format: 'A4',
+  border: '1cm',
+};
+
+pdf.create(html, options).toFile('./invoice.pdf', function (error) {
   if (error) {
     throw error;
   }
