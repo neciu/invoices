@@ -1,0 +1,23 @@
+---
+seller:
+  name: Tomasz Netczuk
+  address: Marszałkowska 1/2 b
+  zipCode: 00-001
+  city: Warszawa
+  nip: 222-222-22-22
+
+client:
+  name: Ministerstwo Cyfryzacji
+  address: Królewska 27
+  zipCode: 00-060
+  city: Warszawa
+  nip: 5213621697
+  regon: 145881488
+
+id: 2016/11/Ministerstwo Cyfryzacji/01
+invoiceDate: 2016-11-28
+billingDate: 2016-11-28
+timeSpan: 7
+netPrice: 6666.34
+vatRate: 0.23
+bankAccount: 11 2222 3333 4444 5555 6666 7777

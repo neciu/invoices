@@ -1,0 +1,137 @@
+.flex-item {
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+}
+
+.flex-column {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.flex-row {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.flex-1 {
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.flex-shrink-0 {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+.invoice {
+    -webkit-align-self: center;
+    align-self: center;
+    margin-top: 10pt;
+}
+
+h1 {
+    margin-top: 0;
+    -webkit-align-self: center;
+    align-self: center;
+    font-size: 12.5pt;
+}
+
+h2 {
+    margin: 0;
+    border-bottom: 1px solid black;
+    font-size: 10pt;
+}
+
+.small {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
+    font-size: 6pt;
+}
+
+.date {
+    -webkit-align-self: flex-end;
+    align-self: flex-end;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
+}
+
+.group {
+    margin: 5pt 15pt 20pt 15pt;
+}
+.group.left {
+    margin-left: 0;
+}
+.group.right {
+    margin-right: 0;
+}
+
+table.items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20pt;
+}
+
+table.items, table.items th, table.items td {
+    border-bottom: 1px solid #ddd;
+}
+
+table.items th {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
+    font-size: 6pt;
+    white-space: nowrap;
+    padding: 4pt;
+}
+table.items th:first-child {
+    padding-left: 0;
+}
+table.items th:last-child {
+    padding-right: 0;
+}
+
+table.items td {
+    vertical-align: top;
+    padding: 4pt;
+}
+table.items td:first-child {
+    padding-left: 0;
+}
+table.items td:last-child {
+    padding-right: 0;
+}
+
+table.summary {
+}
+
+table.summary td {
+    vertical-align: bottom;
+    line-height: 1;
+}
+
+table.summary td.title {
+    line-height: 8pt;
+}
+
+.t-a-c {
+    text-align: center;
+}
+
+.t-a-r {
+    text-align: right;
+}
+
+.signature {
+    border-top: 1px solid #ddd;
+    justify-content: center;
+    margin: 60pt;
+}
+
+.signature span {
+    text-align: center;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 8pt;
+}

@@ -1,0 +1,82 @@
+doctype html
+html(lang="pl")
+  head
+    meta(charset="UTF-8")
+    title=id
+    link(href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200&subset=latin-ext" rel="stylesheet" type="text/css")
+    link(href="./style.css" rel="stylesheet" type="text/css")
+    style
+      include style.css
+
+  body
+  .flex-item.flex-column
+    span.date.small!='Data wystawienia: ' + invoiceDate
+    span.date.small!='Data wykonania usługi: ' + invoiceDate
+    span.invoice.small Faktura VAT
+    h1!=id
+    .flex-item.flex-row
+      .flex-item.flex-column.flex-1.group.left
+        h2 Sprzedawca
+        span!=seller.name
+        span!=seller.address
+        span!=seller.zipCode + ' ' + seller.city
+        span!='NIP: ' + seller.nip
+      .flex-item.flex-column.flex-1.group.right
+        h2 Nabywca
+        span!=client.name
+        span!=client.address
+        span!=client.zipCode + ' ' + client.city
+        span!='NIP: ' + client.nip
+        if client.regon
+          span!='REGON: ' + client.regon
+
+    table.items
+      tr
+        th LP
+        th NAZWA
+        th J. M.
+        th ILOŚĆ
+        th CENA JEDN. NETTO
+        th WARTOŚĆ NETTO
+        th STAWKA VAT
+        th KWOTA VAT
+        th WARTOŚĆ BRUTTO
+      tr
+        td.t-a-c 1
+        td Opis opis opis
+        td.t-a-c szt.
+        td.t-a-c 1
+        td.t-a-r!=netPriceString
+        td.t-a-r!=grossPriceString
+        td.t-a-c!=vatPercentage
+        td.t-a-r!=vatPriceString
+        td.t-a-r!=grossPriceString
+      tr
+        td(colspan=5).t-a-r Razem:
+        td.t-a-r!=netPriceString
+        td
+        td.t-a-r!=vatPriceString
+        td.t-a-r!=grossPriceString
+
+    table.summary
+      tr
+        td.small.t-a-r.title DO ZAPŁATY:
+        td(style="font-size: 10pt;")!=grossPriceString + ' PLN'
+      tr
+        td.small.t-a-r.title SŁOWNIE:
+        td!=grossPriceZlotyPartInWords + ' zł ' + grossPriceGroszPartInWords + ' gr'
+      tr
+        td.small.t-a-r.title TERMIN PŁATNOŚCI:
+        td!=dueDate
+      tr
+        td.small.t-a-r.title FORMA PŁATNOŚCI
+        td przelew
+      tr
+        td.small.t-a-r.title KONTO BANKOWE
+        td!=bankAccount
+
+    .flex-item.flex-row
+      .flex-item.flex-1.small.signature
+        span podpis osoby upoważnionej do wystawienia faktury
+      .flex-item.flex-1.small.signature
+        span podpis osoby upoważnionej do odbioru faktury
