@@ -1,6 +1,6 @@
 {
   "name": "invoices",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "src/starter.js",
   "repository": "git@github.com:neciu/invoices.git",
   "author": "Tomasz Netczuk <contact@netczuk.pl>",

@@ -3,7 +3,7 @@
 ## Roadmap
 
 *v0.1.0*
-- [ ] copy styles from old invoices
+- [x] copy styles from old invoices
 
 *v0.2.0*
 - [ ] add support for input data file path
