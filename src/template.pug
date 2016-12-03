@@ -47,7 +47,7 @@ html(lang="pl")
         td.t-a-c szt.
         td.t-a-c 1
         td.t-a-r!=netPriceString
-        td.t-a-r!=grossPriceString
+        td.t-a-r!=netPriceString
         td.t-a-c!=vatPercentage
         td.t-a-r!=vatPriceString
         td.t-a-r!=grossPriceString
@@ -60,13 +60,13 @@ html(lang="pl")
 
     table.summary
       tr
-        td.small.t-a-r.title DO ZAPŁATY:
+        td.small.t-a-r.title DO ZAPŁATY
         td(style="font-size: 10pt;")!=grossPriceString + ' PLN'
       tr
-        td.small.t-a-r.title SŁOWNIE:
+        td.small.t-a-r.title SŁOWNIE
         td!=grossPriceZlotyPartInWords + ' zł ' + grossPriceGroszPartInWords + ' gr'
       tr
-        td.small.t-a-r.title TERMIN PŁATNOŚCI:
+        td.small.t-a-r.title TERMIN PŁATNOŚCI
         td!=dueDate
       tr
         td.small.t-a-r.title FORMA PŁATNOŚCI
