@@ -6,7 +6,7 @@
 - [x] copy styles from old invoices
 
 *v0.2.0*
-- [ ] add support for input data file path
+- [x] add support for input data file path
 - [ ] add support for output directory and file name
 
 *v0.3.0*

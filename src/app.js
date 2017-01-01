@@ -6,12 +6,27 @@ import {pl as inWords} from 'in-words';
 import moment from 'moment';
 
 
-const invoiceData = getInvoiceData();
+const params = parseParams();
+
+function parseParams() {
+  const inputFilePath = process.argv[2];
+  if (!inputFilePath) {
+    throw new Error('Input file path required');
+  }
+  if (!fs.existsSync(inputFilePath)) {
+    throw new Error('No file under provided input file path');
+  }
+  return {
+    inputFilePath,
+  };
+}
+
+const invoiceData = getInvoiceData(params.inputFilePath);
 const html = renderTemplate();
 
 
-function getInvoiceData() {
-  const rawInvoiceData = yaml.safeLoad(fs.readFileSync('./invoice-data/.example.yaml', 'utf8'));
+function getInvoiceData(filePath) {
+  const rawInvoiceData = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
   const {netPrice, vatRate, invoiceDate, timeSpan} = rawInvoiceData;
 
 
