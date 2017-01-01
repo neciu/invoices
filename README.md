@@ -7,7 +7,7 @@
 
 *v0.2.0*
 - [x] add support for input data file path
-- [ ] add support for output directory and file name
+- [x] add support for output directory and file name
 
 *v0.3.0*
 - [ ] add tests covering data parsing

@@ -9,6 +9,16 @@ import moment from 'moment';
 const params = parseParams();
 
 function parseParams() {
+  const inputFilePath = parseInputFilePath();
+  const outputFilePath = parseOutputFilePath(inputFilePath);
+
+  return {
+    inputFilePath,
+    outputFilePath,
+  };
+}
+
+function parseInputFilePath() {
   const inputFilePath = process.argv[2];
   if (!inputFilePath) {
     throw new Error('Input file path required');
@@ -16,9 +26,18 @@ function parseParams() {
   if (!fs.existsSync(inputFilePath)) {
     throw new Error('No file under provided input file path');
   }
-  return {
-    inputFilePath,
-  };
+  return inputFilePath;
+}
+
+function parseOutputFilePath(inputFilePath) {
+  const outputFilePath = process.argv[3];
+  if (!outputFilePath) {
+    const splitPath = inputFilePath.split('.');
+    splitPath.pop();
+    splitPath.push('pdf');
+    return splitPath.join('.');
+  }
+  return outputFilePath;
 }
 
 const invoiceData = getInvoiceData(params.inputFilePath);
@@ -26,6 +45,7 @@ const html = renderTemplate();
 
 
 function getInvoiceData(filePath) {
+  console.info(`Loading file: ${filePath}`);
   const rawInvoiceData = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
   const {netPrice, vatRate, invoiceDate, timeSpan} = rawInvoiceData;
 
@@ -72,7 +92,8 @@ const options = {
   border: '1cm',
 };
 
-pdf.create(html, options).toFile('./invoice.pdf', function (error) {
+console.info(`Saving file: ${params.outputFilePath}`);
+pdf.create(html, options).toFile(params.outputFilePath, function (error) {
   if (error) {
     throw error;
   }
