@@ -4,7 +4,10 @@ import pug from 'pug';
 import pdf from 'html-pdf';
 import {pl as inWords} from 'in-words';
 import moment from 'moment';
+import Intl from 'intl';
 
+const numberFormat = new Intl.NumberFormat('pl-PL', {style:'currency', currency:'PLN'});
+const percentFormat = new Intl.NumberFormat('pl-PL', { style: 'percent', minimumFractionDigits: 2});
 
 const params = parseParams();
 
@@ -55,9 +58,9 @@ function getInvoiceData(filePath) {
 
   const grossPriceZlotyPartInWords = inWords(parseInt(grossPrice));
   const grossPriceGroszPartInWords = inWords(parseInt(grossPrice * 100 % 100));
-  const grossPriceString = Number(grossPrice).toLocaleString('pl-PL', { minimumFractionDigits: 2});
-  const netPriceString = Number(netPrice).toLocaleString('pl-PL', { minimumFractionDigits: 2});
-  const vatPriceString = Number(vatPrice).toLocaleString('pl-PL', { minimumFractionDigits: 2});
+  const grossPriceString = numberFormat.format(grossPrice);
+  const netPriceString = numberFormat.format(netPrice);
+  const vatPriceString = numberFormat.format(vatPrice);
 
 
   return {
@@ -66,7 +69,7 @@ function getInvoiceData(filePath) {
     grossPriceString,
     netPriceString,
     vatPriceString,
-    vatPercentage: Number(vatRate).toLocaleString('pl-PL', { style: 'percent', minimumFractionDigits: 2}),
+    vatPercentage: percentFormat.format(vatRate),
     grossPriceZlotyPartInWords,
     grossPriceGroszPartInWords,
     dueDate: dueDate(invoiceDate, timeSpan),
