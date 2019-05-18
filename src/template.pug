@@ -25,7 +25,10 @@ html(lang="pl")
         span!=client.name
         span!=client.address
         span!=client.zipCode + ' ' + client.city
-        span!='NIP: ' + client.nip
+        if client.nip
+          span!='NIP: ' + client.nip
+        if client.vatUe
+          span!='VAT-UE: ' + client.vatUe
         if client.regon
           span!='REGON: ' + client.regon
 
