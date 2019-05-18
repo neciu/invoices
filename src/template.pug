@@ -69,10 +69,20 @@ html(lang="pl")
         td!=dueDate
       tr
         td.small.t-a-r.title FORMA PŁATNOŚCI
-        td przelew
-      tr
-        td.small.t-a-r.title KONTO BANKOWE
-        td!=bankAccount
+        td
+          if bankAccount
+            | przelew
+          else
+            | gotówka
+      if bankAccount
+        tr
+          td.small.t-a-r.title KONTO BANKOWE
+          td!=bankAccount
+      else
+        tr
+          td.small.t-a-r.title ZAPŁACONO
+          td!=grossPriceString + ' PLN'
+
 
     .flex-item.flex-row
       .flex-item.flex-1.small.signature
