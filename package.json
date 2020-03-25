@@ -10,7 +10,7 @@
     "in-words": "git://github.com/neciu/node-in-words.git#c92c1d1",
     "intl": "1.2.5",
     "js-yaml": "3.9.1",
-    "moment": "2.18.1",
+    "moment": "2.19.3",
     "phantomjs-prebuilt": "2.1.15",
     "pug": "2.0.0-rc.3"
   },
