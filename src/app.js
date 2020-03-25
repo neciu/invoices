@@ -50,31 +50,37 @@ const html = renderTemplate();
 function getInvoiceData(filePath) {
   console.info(`Loading file: ${filePath}`);
   const rawInvoiceData = yaml.safeLoad(fs.readFileSync(filePath, 'utf8'));
-  const {netPrice, vatRate, invoiceDate, timeSpan} = rawInvoiceData;
+  const {description, netPrice, vatRate, invoiceDate, timeSpan, items} = rawInvoiceData;
+  
+  const parsedItems = getItems(description, netPrice, vatRate, items);
 
-
-  const grossPrice = fixed(Number(netPrice) * (1 + Number(vatRate)));
-  const vatPrice = fixed(Number(netPrice) * Number(vatRate));
-
-  const grossPriceZlotyPartInWords = inWords(parseInt(grossPrice));
-  const grossPriceGroszPartInWords = inWords(parseInt(grossPrice * 100 % 100));
-  const grossPriceString = numberFormat.format(grossPrice);
-  const netPriceString = numberFormat.format(netPrice);
-  const vatPriceString = numberFormat.format(vatPrice);
+  const grossPriceZlotyPartInWords = inWords(parseInt(sumItems(parsedItems, 'grossPrice')));
+  const grossPriceGroszPartInWords = inWords(parseInt(sumItems(parsedItems, 'grossPrice') * 100 % 100));
+  
+  const totalNetPrice = sumItems(parsedItems, 'netPrice');
+  const totalVatPrice = sumItems(parsedItems, 'vatPrice');
+  const totalGrossPrice = sumItems(parsedItems, 'grossPrice');
 
 
   return {
     ...rawInvoiceData,
     invoiceDate: moment(invoiceDate).format('YYYY-MM-DD'),
-    grossPriceString,
-    netPriceString,
-    vatPriceString,
-    vatPercentage: percentFormat.format(vatRate),
+    totalNetPrice,
+    totalVatPrice,
+    totalGrossPrice,
     grossPriceZlotyPartInWords,
     grossPriceGroszPartInWords,
     dueDate: dueDate(invoiceDate, timeSpan),
+    items: parsedItems,
+    formatNumber: numberFormat.format,
+    formatPercent: percentFormat.format,
   }
 }
+
+function sumItems(items, key) {
+  return items.reduce((acc, curr) => fixed(Number(acc) + Number(curr[key])), "0")
+}
+
 
 function fixed(number) {
   // http://www.vat.pl/interpretacje/zaokraglanie-kwot-na-fakturze-vat--groszowe-roznice-w-sumach-pozycji-faktury--20130722-9447/
@@ -88,6 +94,26 @@ function dueDate(date, timeSpan) {
 
 function renderTemplate() {
   return pug.renderFile('./src/template.pug', invoiceData);
+}
+
+function getItems(description, netPrice, vatRate, items) {
+  if (items) {
+    return items.map(item => ({
+      description: item.description,
+      netPrice: fixed(Number(item.netPrice)),
+      grossPrice: fixed(Number(item.netPrice) * (1 + Number(item.vatRate))),
+      vatPrice: fixed(Number(item.netPrice) * Number(item.vatRate)),
+      vatRate: item.vatRate,
+    }));
+  } else {
+    return [{
+      description: description,
+      netPrice: fixed(Number(netPrice)),
+      grossPrice: fixed(Number(netPrice) * (1 + Number(vatRate))),
+      vatPrice: fixed(Number(netPrice) * Number(vatRate)),
+      vatRate: vatRate,
+    }]
+  }
 }
 
 const options = {

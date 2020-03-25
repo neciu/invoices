@@ -32,6 +32,7 @@ html(lang="pl")
         if client.regon
           span!='REGON: ' + client.regon
 
+
     table.items
       tr
         th LP
@@ -43,27 +44,28 @@ html(lang="pl")
         th STAWKA VAT
         th KWOTA VAT
         th WARTOŚĆ BRUTTO
-      tr
-        td.t-a-c 1
-        td!=description
-        td.t-a-c szt.
-        td.t-a-c 1
-        td.t-a-r!=netPriceString
-        td.t-a-r!=netPriceString
-        td.t-a-c!=vatPercentage
-        td.t-a-r!=vatPriceString
-        td.t-a-r!=grossPriceString
+      each item, index in items
+        tr
+          td.t-a-c!=index+1
+          td!=item.description
+          td.t-a-c szt.
+          td.t-a-c 1
+          td.t-a-r!=formatNumber(item.netPrice)
+          td.t-a-r!=formatNumber(item.netPrice)
+          td.t-a-c!=formatPercent(item.vatRate)
+          td.t-a-r!=formatNumber(item.vatPrice)
+          td.t-a-r!=formatNumber(item.grossPrice)
       tr
         td(colspan=5).t-a-r Razem:
-        td.t-a-r!=netPriceString
+        td.t-a-r!=formatNumber(totalNetPrice)
         td
-        td.t-a-r!=vatPriceString
-        td.t-a-r!=grossPriceString
+        td.t-a-r!=formatNumber(totalVatPrice)
+        td.t-a-r!=formatNumber(totalGrossPrice)
 
     table.summary
       tr
         td.small.t-a-r.title DO ZAPŁATY
-        td(style="font-size: 10pt;")!=grossPriceString + ' PLN'
+        td(style="font-size: 10pt;")!=formatNumber(totalGrossPrice)
       tr
         td.small.t-a-r.title SŁOWNIE
         td!=grossPriceZlotyPartInWords + ' zł ' + grossPriceGroszPartInWords + ' gr'
@@ -84,7 +86,7 @@ html(lang="pl")
       else
         tr
           td.small.t-a-r.title ZAPŁACONO
-          td!=grossPriceString + ' PLN'
+          td!=formatNumber(totalGrossPrice)
 
 
     .flex-item.flex-row
