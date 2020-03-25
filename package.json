@@ -6,19 +6,19 @@
   "author": "Tomasz Netczuk <contact@netczuk.pl>",
   "license": "MIT",
   "dependencies": {
-    "html-pdf": "2.1.0",
+    "html-pdf": "2.2.0",
     "in-words": "git://github.com/neciu/node-in-words.git#c92c1d1",
     "intl": "1.2.5",
-    "js-yaml": "3.9.1",
-    "moment": "2.18.1",
-    "phantomjs-prebuilt": "2.1.15",
-    "pug": "2.0.0-rc.3"
+    "js-yaml": "3.13.1",
+    "moment": "2.24.0",
+    "phantomjs-prebuilt": "2.1.16",
+    "pug": "2.0.4"
   },
   "devDependencies": {
-    "babel-preset-env": "1.6.0",
+    "babel-preset-env": "1.7.0",
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.26.0",
-    "eslint": "4.5.0"
+    "eslint": "6.8.0"
   },
   "scripts": {
     "start": "node ./src/starter.js",
