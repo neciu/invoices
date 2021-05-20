@@ -6,7 +6,7 @@
   "author": "Tomasz Netczuk <contact@netczuk.pl>",
   "license": "MIT",
   "dependencies": {
-    "html-pdf": "2.2.0",
+    "html-pdf": "3.0.1",
     "in-words": "git://github.com/neciu/node-in-words.git#c92c1d1",
     "intl": "1.2.5",
     "js-yaml": "3.13.1",
